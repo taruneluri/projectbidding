@@ -7,4 +7,9 @@ router.use(express.urlencoded({extended:false}));
 //mongodb requirement
 var mongoose=require('./mongodb');
 
+//sending pages
+router.get('/contractorsignup',(req,res)=>{
+    res.sendFile(path.resolve('pages/contractorsignup.html'));
+});
+
 module.exports=router;

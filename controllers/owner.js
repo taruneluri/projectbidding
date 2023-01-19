@@ -8,13 +8,27 @@ router.use(express.urlencoded({extended:false}));
 var mongoose=require('./mongodb');
 //Schema Requirement
 var Owner=require('../schema/owner');
+var Addedprojects=require('../schema/addedprojects');
+const addedprojects = require('../schema/addedprojects');
+//Local variables 
+var user_details;
+var added_project_details;
 //sending Pages
 router.get('/ownersignup',(req,res)=>{
     res.sendFile(path.resolve('pages/projectownersignup.html'));
 });
 router.get('/ownerlogin',(req,res)=>{
     res.sendFile(path.resolve('pages/projectownerlogin.html'));
-})
+});
+router.get('/ownerhomepage',(req,res)=>{
+    res.sendFile(path.resolve('pages/POHome.html'));
+});
+router.get('/addnewproject',(req,res)=>{
+    res.sendFile(path.resolve('pages/POAddnewproject.html'));
+});
+router.get('/addedprojects',(req,res)=>{
+    res.sendFile(path.resolve('pages/POAddedProjects.html'));
+});
 //owner Registration
 router.post('/register',(req,res)=>{
     var a=req.body.name;
@@ -52,5 +66,100 @@ router.post('/register',(req,res)=>{
         }
     })
 
+})
+//owner login
+router.post('/login',(req,res)=>{
+    var a=req.body.email;
+    var b=req.body.pass;
+    Owner.findOne({email:a,pass:b},(err,result)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            if(result==null)
+            {
+                res.send("invalid");
+            }
+            else
+            {
+                user_details=result;
+                console.log(user_details);
+                res.send("true");
+            }
+        }
+    })
+});
+//adding new project
+router.post('/addnewproject',(req,res)=>{
+    var a=req.body.pro_area;
+    var b=req.body.pro_floors;
+    var c=req.body.pro_city;
+    var d=req.body.pro_add;
+    var e=req.body.pro_use;
+    var f=req.body.pro_type;
+    var g=req.body.pro_first_name;
+    var h=req.body.pro_last_name;
+    var i=req.body.pro_phone;
+    var j=req.body.pro_email;
+    console.log(req.body);
+    if(user_details.email == j)
+    {
+        addedprojects.create({
+            pro_area:a,
+            pro_floors:b,
+            pro_city:c,
+            pro_add:d,
+            pro_use:e,
+            pro_type:f,
+            pro_first_name:g,
+            pro_last_name:h,
+            pro_phone:i,
+            pro_email:j
+
+        },(err)=>{
+            if(err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                res.send("true");
+            }
+        })
+    }
+    else
+    {
+        res.send("invalid");
+    }
+
+});
+router.post('/projectdisplay',(req,res)=>{
+    addedprojects.find({pro_email:user_details.email},(err,result)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            added_project_details=result;
+            console.log(result);
+            res.send(result);
+        }
+    })
+});
+router.get('/deleteadded/:id',(req,res)=>{
+    var id=req.params.id;
+    addedprojects.deleteOne(added_project_details[id],(err)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.redirect('/owner/addedprojects')
+        }
+    })
 })
 module.exports=router;
