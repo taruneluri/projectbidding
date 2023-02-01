@@ -85,7 +85,6 @@ router.post('/login',(req,res)=>{
             else
             {
                 user_details=result;
-                console.log(user_details);
                 res.send("true");
             }
         }
@@ -144,7 +143,6 @@ router.post('/projectdisplay',(req,res)=>{
         else
         {
             added_project_details=result;
-            console.log(result);
             res.send(result);
         }
     })
