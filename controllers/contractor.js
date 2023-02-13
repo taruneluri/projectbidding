@@ -10,6 +10,7 @@ var mongoose=require('./mongodb');
 var Contractor=require('../schema/contractor');
 const contractor = require('../schema/contractor');
 var addedprojects = require('../schema/addedprojects');
+var Bidsdetails = require('../schema/bidsdetails');
 //sending pages
 router.get('/contractorsignup',(req,res)=>{
     res.sendFile(path.resolve('pages/contractorsignup.html'));
@@ -23,6 +24,7 @@ router.get('/ownerhomepage',(req,res)=>{
 //local variables
 var con_details;
 var projects_displayed;
+var email_of_project;
 //post api
 router.post('/register',(req,res)=>{
     var a=req.body.name;
@@ -90,7 +92,6 @@ router.post('/login',(req,res)=>{
 });
 router.post('/searchprojects',(req,res)=>{
     var a=req.body.city;
-    console.log(a);
     addedprojects.find({pro_city:a},(err,result)=>{
         if(err)
         {
@@ -98,7 +99,6 @@ router.post('/searchprojects',(req,res)=>{
         }
         else
         {
-            console.log(result);
             if(result==[])
             {
 
@@ -111,5 +111,33 @@ router.post('/searchprojects',(req,res)=>{
         }
     })
 
+});
+router.get('/bidtheproject/:id',(req,res)=>{
+    var id=req.params.id;
+    email_of_project = projects_displayed[id].pro_email;
+
+    Bidsdetails.create({
+        owner_mail:projects_displayed[id].pro_email,
+        contractor_mail:con_details.email,
+        contractor_mobile:con_details.mobile,
+        pro_area:projects_displayed[id].pro_area,
+        pro_city:projects_displayed[id].pro_city,
+        pro_floors:projects_displayed[id].pro_floors,
+        contractor_company:con_details.company_name,
+        pro_use:projects_displayed[id].pro_use,
+        pro_type:projects_displayed[id].pro_type
+    },(err)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            
+            res.redirect('/contractor/ownerhomepage')
+        }
+    })
+    
+    
 })
 module.exports=router;
