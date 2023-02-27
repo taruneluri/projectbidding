@@ -9,10 +9,12 @@ var mongoose=require('./mongodb');
 //Schema Requirement
 var Owner=require('../schema/owner');
 var Addedprojects=require('../schema/addedprojects');
-const addedprojects = require('../schema/addedprojects');
+var addedprojects = require('../schema/addedprojects');
+var bidsdetails = require('../schema/bidsdetails');
 //Local variables 
 var user_details;
 var added_project_details;
+var bids_details;
 //sending Pages
 router.get('/ownersignup',(req,res)=>{
     res.sendFile(path.resolve('pages/projectownersignup.html'));
@@ -29,6 +31,9 @@ router.get('/addnewproject',(req,res)=>{
 router.get('/addedprojects',(req,res)=>{
     res.sendFile(path.resolve('pages/POAddedProjects.html'));
 });
+router.get('/recievedbids',(req,res)=>{
+    res.sendFile(path.resolve('pages/POAddedBids.html'));
+})
 //owner Registration
 router.post('/register',(req,res)=>{
     var a=req.body.name;
@@ -159,5 +164,32 @@ router.get('/deleteadded/:id',(req,res)=>{
             res.redirect('/owner/addedprojects')
         }
     })
-})
+});
+router.post('/bidsdisplay',(req,res)=>{
+    bidsdetails.find({owner_mail:user_details.email},(err,result)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            bids_details=result;
+            console.log(result);
+            res.send(result);
+        }
+    })
+});
+router.get('/deleterecievedbid/:id',(req,res)=>{
+    var id=req.params.id;
+    bidsdetails.deleteOne(bids_details[id],(err)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.redirect('/owner/recievedbids');
+        }
+    })
+});
 module.exports=router;
