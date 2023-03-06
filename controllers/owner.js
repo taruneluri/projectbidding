@@ -174,7 +174,6 @@ router.post('/bidsdisplay',(req,res)=>{
         else
         {
             bids_details=result;
-            console.log(result);
             res.send(result);
         }
     })
