@@ -5,18 +5,6 @@ var admin=new schema({
         type:Number,
         required:true
     },
-    name:{
-        type:String,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true
-    },
-    mobile:{
-        type:Number,
-        required:true
-    },
     password:{
         type:String,
         required:true,
