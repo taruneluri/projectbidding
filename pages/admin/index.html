@@ -215,7 +215,7 @@
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Current Bids</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0" id="cbcount"></h6>
                             </div>
                         </div>
                     </div>
@@ -297,24 +297,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Delete</a></td>
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+             <!-- Ongoing Bids -->
+             <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h5 class="mb-0">Bids </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0" id="BID">
+                            <thead>
+                                <tr class="text-dark">
+                                    <th scope="col">Owner Mail</th>
+                                    <th scope="col">Contractor Mail</th>
+                                    <th scope="col">Contactor Mobile</th>
+                                    <th scope="col">Project Area</th>
+                                    <th scope="col">Project City</th>
+                                    <th scope="col">Floors</th>
+                                    <th scope="col">Contactor Company</th>
+                                    <th scope="col">Use</th>
+                                    <th scope="col">Type</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                            
                                 
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded-top p-4">
@@ -425,6 +442,31 @@
         
     }
     c.send()
+
+    //ongoing bids
+    var d=new XMLHttpRequest();
+    d.open('POST','/admin/getbidsto',true);
+    d.onload=function(){
+        var data=JSON.parse(this.responseText); 
+        document.getElementById('cbcount').innerHTML=data.length;
+        for(var i=0;i<data.length;i++)
+        {
+            var html =  '<tr>'+
+            '    <td>'+data[i].owner_mail+'</td>'+
+            '    <td>'+data[i].contractor_mail+'</td>'+
+            '    <td>'+data[i].contractor_mobile+'</td>'+
+            '    <td>'+data[i].pro_area+'</td>'+
+            '    <td>'+data[i].pro_city+'</td>'+
+            '    <td>'+data[i].pro_floors+'</td>'+
+            '    <td>'+data[i].contractor_company+'</td>'+
+            '    <td>'+data[i].pro_use+'</td>'+
+            '    <td>'+data[i].pro_type+'</td>'+
+            '</tr>';
+            var div=document.getElementById('BID');
+            div.insertAdjacentHTML('afterbegin',html);
+        }
+    }
+    d.send();
 </script>
 
 </html>

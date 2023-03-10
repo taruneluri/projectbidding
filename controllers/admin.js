@@ -11,6 +11,7 @@ var Admin=require('../schema/admin');
 var Owner=require('../schema/owner');
 var Contractor=require('../schema/contractor');
 var addedprojects = require('../schema/addedprojects');
+var biddetails=require('../schema/bidsdetails');
 //local variables
 var admindetails;
 //sending pages
@@ -107,6 +108,18 @@ router.post('/getcodetails',(req,res)=>{
 //project information
 router.post('/getprodet',(req,res)=>{
     addedprojects.find({},(err,result)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.send(result);
+        }
+    })
+});
+router.post('/getbidsto',(req,res)=>{
+    biddetails.find({},(err,result)=>{
         if(err)
         {
             console.log(err);
