@@ -197,7 +197,7 @@
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2"> Contractors</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0" id="cocount"></h6>
                             </div>
                         </div>
                     </div>
@@ -206,7 +206,7 @@
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Projects</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0" id="pcount"></h6>
                             </div>
                         </div>
                     </div>
@@ -224,7 +224,7 @@
             <!-- Sale & Revenue End -->
 
 
-            <!-- Recent Sales Start -->
+            <!-- Project Owner-->
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -247,8 +247,73 @@
                     </div>
                 </div>
             </div>
-            <!-- Recent Sales End -->
+           
 
+            <!-- Contractor -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h5 class="mb-0">Contractors </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0" id="CO">
+                            <thead>
+                                <tr class="text-dark">
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Company Name</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Added -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h5 class="mb-0">Projects </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0" id="PR">
+                            <thead>
+                                <tr class="text-dark">
+                                    <th scope="col">Area</th>
+                                    <th scope="col">Floors</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Use</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Mobile</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Delete</a></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
@@ -290,6 +355,7 @@
     <script src="js/main.js"></script>
 </body>
 <script>
+    //project owner
     var a = new XMLHttpRequest();
     a.open('POST','/admin/getpodetails',true);
     a.onload=function(){
@@ -311,6 +377,54 @@
     }
     a.send();
 
+    //contractor
+    var b=new XMLHttpRequest();
+    b.open('POST','/admin/getcodetails',true);
+    b.onload=function(){
+        var data=JSON.parse(this.responseText);
+        document.getElementById('cocount').innerHTML=data.length;
+        for(var i=0;i<data.length;i++)
+        {
+            var html =  '<tr>'+
+            '    <td> '+data[i].name+' </td>'+
+            '    <td> '+data[i].email+' </td>'+
+            '    <td>'+data[i].mobile+'</td>'+
+            '    <td>'+data[i].company_name+'</td>'+
+            '    <td>'+data[i].city+'</td>'+
+            '    <td><a class="btn btn-sm btn-primary" href="">Delete</a></td>'+
+            '</tr>';
+            var div=document.getElementById('CO');
+            div.insertAdjacentHTML('afterbegin',html);
+        }
+            
+    }
+    b.send();
+
+    //projects
+    var c=new XMLHttpRequest();
+    c.open('post','/admin/getprodet',true);
+    c.onload=function(){
+        var data=JSON.parse(this.responseText);
+        document.getElementById('pcount').innerHTML=data.length;
+        for(var i=0;i<data.length;i++)
+        {
+            var html =  '<tr>'+
+            '    <td>'+data[i].pro_area+'</td>'+
+            '    <td>'+data[i].pro_floors+'</td>'+
+            '    <td>'+data[i].pro_city+'</td>'+
+            '    <td>'+data[i].pro_use+'</td>'+
+            '    <td>'+data[i].pro_type+'</td>'+
+            '    <td>'+data[i].pro_first_name+'</td>'+
+            '    <td>'+data[i].pro_phone+'</td>'+
+            '    <td>'+data[i].pro_email+'</td>'+
+            '    <td><a class="btn btn-sm btn-primary" href="">Delete</a></td>'+
+            '</tr>';
+            var div=document.getElementById('PR');
+            div.insertAdjacentHTML('afterbegin',html);
+        }
+        
+    }
+    c.send()
 </script>
 
 </html>

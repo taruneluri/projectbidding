@@ -8,7 +8,9 @@ router.use(express.urlencoded({extended:false}));
 var mongoose=require('./mongodb');
 //schema require ment
 var Admin=require('../schema/admin');
-var Owner=require('../schema/owner')
+var Owner=require('../schema/owner');
+var Contractor=require('../schema/contractor');
+var addedprojects = require('../schema/addedprojects');
 //local variables
 var admindetails;
 //sending pages
@@ -90,5 +92,29 @@ router.post('/getpodetails',(req,res)=>{
         }
     })
 });
-
+router.post('/getcodetails',(req,res)=>{
+    Contractor.find({},(err,result)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.send(result);
+        }
+    })
+});
+//project information
+router.post('/getprodet',(req,res)=>{
+    addedprojects.find({},(err,result)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.send(result);
+        }
+    })
+})
 module.exports=router;
