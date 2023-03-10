@@ -8,6 +8,7 @@ router.use(express.urlencoded({extended:false}));
 var mongoose=require('./mongodb');
 //schema require ment
 var Admin=require('../schema/admin');
+var Owner=require('../schema/owner')
 //local variables
 var admindetails;
 //sending pages
@@ -16,6 +17,9 @@ router.get('/adminsignup',(req,res)=>{
 });
 router.get('/adminlogin',(req,res)=>{
     res.sendFile(path.resolve('pages/admin/signin.html'))
+});
+router.get('/adminhome',(req,res)=>{
+    res.sendFile(path.resolve('pages/admin/index.html'));
 })
 //post methods
 router.post('/adminsignup',(req,res)=>{
@@ -73,4 +77,18 @@ router.post('/adminlogin',(req,res)=>{
         }
     })
 });
+//providing project owner information
+router.post('/getpodetails',(req,res)=>{
+    Owner.find({},(err,result)=>{
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.send(result);
+        }
+    })
+});
+
 module.exports=router;
