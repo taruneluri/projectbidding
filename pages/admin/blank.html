@@ -59,28 +59,10 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Buttons</a>
-                            <a href="typography.html" class="dropdown-item">Typography</a>
-                            <a href="element.html" class="dropdown-item">Other Elements</a>
-                        </div>
-                    </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item active">Blank Page</a>
-                        </div>
-                    </div>
+                    <a href="/admin/adminhome" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    
+                    <a href="/admin/cost-estimation-form" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Form</a>
+                    
                 </div>
             </nav>
         </div>
@@ -183,29 +165,98 @@
             <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
-                    <div class="col-md-6 text-center">
-                        <h3>This is blank page</h3>
+                    <div class="col-md-6 ">
+                        <!-- <h3>This is blank page</h3> -->
+                        <div class="col-sm-12 col-xl-12">
+                            <div class="bg-light rounded h-100 p-4">
+                                <h6 class="mb-4">Cost Estimation Values</h6>
+                                <form>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Total Construction Cost</label>
+                                        <input type="number" class="form-control" id="total-cost">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Steel</label>
+                                        <input type="number" class="form-control" id="steel">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Cement</label>
+                                        <input type="number" class="form-control" id="cement">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Bricks</label>
+                                        <input type="number" class="form-control" id="bricks">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Stone</label>
+                                        <input type="number" class="form-control" id="stone">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Sand</label>
+                                        <input type="number" class="form-control" id="sand">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Water</label>
+                                        <input type="number" class="form-control" id="water">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Excavation</label>
+                                        <input type="number" class="form-control" id="excavation">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Labour</label>
+                                        <input type="number" class="form-control" id="labour">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Design Fee</label>
+                                        <input type="number" class="form-control" id="design-fee">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Doors and Windows</label>
+                                        <input type="number" class="form-control" id="doors">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Frame Work</label>
+                                        <input type="number" class="form-control" id="frame-work">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Plumbing</label>
+                                        <input type="number" class="form-control" id="plumbing">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Electrical Work</label>
+                                        <input type="number" class="form-control" id="electric">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Flooring</label>
+                                        <input type="number" class="form-control" id="flooring">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Painting</label>
+                                        <input type="number" class="form-control" id="painting">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Boundary Walls</label>
+                                        <input type="number" class="form-control" id="boundary">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Other Expenses</label>
+                                        <input type="number" class="form-control" id="others">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                </form>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
             <!-- Blank End -->
 
 
-            <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
+            
         </div>
         <!-- Content End -->
 

@@ -23,6 +23,9 @@ router.get('/adminlogin',(req,res)=>{
 });
 router.get('/adminhome',(req,res)=>{
     res.sendFile(path.resolve('pages/admin/index.html'));
+});
+router.get('/cost-estimation-form',(req,res)=>{
+    res.sendFile(path.resolve('pages/admin/blank.html'));
 })
 //post methods
 router.post('/adminsignup',(req,res)=>{
