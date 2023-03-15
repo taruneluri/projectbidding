@@ -244,7 +244,7 @@
                                         <input type="number" class="form-control" id="others">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    <button type="button" onclick="add()" class="btn btn-primary">Add Details</button>
                                 </form>
                             </div>
                         </div>
@@ -279,5 +279,54 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
+<script>
+    function add(){
+        var total_cost=document.getElementById('total-cost').value;
+        var steel=document.getElementById('steel').value;
+        var cement=document.getElementById('cement').value;
+        var bricks=document.getElementById('bricks').value;
+        var stone=document.getElementById('stone').value;
+        var sand=document.getElementById('sand').value;
+        var water=document.getElementById('water').value;
+        var excavation=document.getElementById('excavation').value;
+        var labour=document.getElementById('labour').value;
+        var design_fee=document.getElementById('design-fee').value;
+        var doors=document.getElementById('doors').value;
+        var frame_work=document.getElementById('frame-work').value;
+        var plumbing=document.getElementById('plumbing').value;
+        var electric=document.getElementById('electric').value;
+        var flooring=document.getElementById('flooring').value;
+        var painting=document.getElementById('painting').value;
+        var boundary=document.getElementById('boundary').value;
+        var others=document.getElementById('others').value;
 
+        if(total_cost.length == 0 ||steel.length == 0 ||cement.length == 0 ||bricks.length == 0 ||stone.length == 0 ||sand.length == 0 ||water.length == 0 ||excavation.length == 0 ||labour.length == 0 ||design_fee.length == 0 ||doors.length == 0 ||frame_work.length == 0 ||plumbing.length == 0 ||electric.length == 0 ||flooring.length == 0 ||painting.length == 0 ||boundary.length == 0 ||others.length == 0)
+        {
+            alert("Please Fill All The Values");
+        }
+        else
+        {
+            var xhttp=new XMLHttpRequest();
+            xhttp.open("POST",'/admin/inputdata',true);
+            xhttp.onreadystatechange = ()=>{
+                if( xhttp.readyState===4 && xhttp.status===200)
+                {
+                    var data=xhttp.responseText;
+                    if(data=="true")
+                    {
+                        alert("added Sucessfully");
+                        window.location.href='/admin/adminhome'
+                    }
+                    else if(data=="invalid")
+                    {
+
+                    }
+                }
+            }
+            xhttp.setRequestHeader("Content-Type","application/json");
+            var data=JSON.stringify({"total_cost":total_cost,"steel":steel,"cement":cement,"bricks":bricks,"stone":stone,"sand":sand,"water":water,"excavation":excavation,"labour":labour,"design_fee":design_fee,"doors":doors,"frame_work":frame_work,"plumbing":plumbing,"electric":electric,"flooring":flooring,"painting":painting,"boundary":boundary,"others":others});
+            xhttp.send(data);
+        }
+    }
+</script>
 </html>
