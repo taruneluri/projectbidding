@@ -83,29 +83,116 @@
               <form action="" method="post" role="form" class="contactForm">
                 <div class="form-row">
                   <div class="form-group col-lg-6">
-                    <input type="number"  class="form-control" id="name" placeholder="Plot Width" />
+                    <input type="number"  class="form-control" id="wid" placeholder="Plot Width" />
                     <div class="validation"></div>
                   </div>
                   <div class="form-group col-lg-6">
-                    <input type="number" class="form-control" id="email" placeholder="Plot Length"  />
+                    <input type="number" class="form-control" id="len" placeholder="Plot Length"  />
                     <div class="validation"></div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="number" class="form-control" name="subject" id="subject" placeholder="Number of floors"  />
+                  <input type="number" class="form-control" id="no" placeholder="Number of floors"  />
                   <div class="validation"></div>
                 </div>
                 
-                <div class="text-center"><button type="button" class="btn btn-primary">Calculate</button></div>
+                <div class="text-center"><button type="button" onclick="give()" class="btn btn-primary">Calculate</button></div>
               </form>
             </div>
           </div>
 
         </div>
+        <br><br>
+        <div class="section-header">
+          <div class="row wow fadeInUp">
+            <div class="col-lg-6 align-self-center offset-3">
+              <table class="table">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                <tr>
+                  <td>Total Construction Cost </td>
+                  <td id="total_cost"></td>
+                </tr>
+                <tr>
+                  <td>Steel</td>
+                  <td id="steel"></td>
+                </tr>
+                <tr>
+                  <td>Cement</td>
+                  <td id="cement"></td>
+                </tr>
+                <tr>
+                  <td>Bricks</td>
+                  <td id="bricks"></td>
+                </tr>
+                <tr>
+                  <td>Stone</td>
+                  <td id="stone"></td>
+                </tr>
+                <tr>
+                  <td>Sand</td>
+                  <td id="sand"></td>
+                </tr>
+                <tr>
+                  <td>Water</td>
+                  <td id="water"></td>
+                </tr>
+                <tr>
+                  <td>Excavation</td>
+                  <td id="excavation"></td>
+                </tr>
+                <tr>
+                  <td>Labour</td>
+                  <td id="labour"></td>
+                </tr>
+                <tr>
+                  <td>Design Fee</td>
+                  <td id="design_fee"></td>
+                </tr>
+                <tr>
+                  <td>Doors</td>
+                  <td id="doors"></td>
+                </tr>
+                <tr>
+                  <td>Frame Work</td>
+                  <td id="frame_works"></td>
+                </tr>
+                <tr>
+                  <td>Plumbing</td>
+                  <td id="plumbing"></td>
+                </tr>
+                <tr>
+                  <td>Electric Works</td>
+                  <td id="electric"></td>
+                </tr>
+                <tr>
+                  <td>Flooring</td>
+                  <td id="flooring"></td>
+                </tr>
+                <tr>
+                  <td>Painting</td>
+                  <td id="painting"></td>
+                </tr>
+                <tr>
+                  <td>Boundary</td>
+                  <td id="boundary"></td>
+                </tr>
+                <tr>
+                  <td>Other Expences</td>
+                  <td id="others"></td>
+                </tr>
+                
+              </table>
+  
+            </div>
+          </div>
+        </div>
 
       </div>
     </section><!-- #contact -->
-
+    
   </main>
 
   
@@ -133,4 +220,50 @@
   <script src="js/main.js"></script>
 
 </body>
+<script>
+  function give(){
+    var wid=document.getElementById('wid').value;
+    var len=document.getElementById('len').value;
+    var no=document.getElementById('no').value;
+    if(wid.length==0 || len.length==0 || no.length==0)
+    {
+      alert("All Values are required");
+    }
+    else
+    {
+      var xhttp=new XMLHttpRequest();
+      xhttp.open('POST','/ce/give',true);
+      xhttp.onreadystatechange=()=>{
+        if(xhttp.status===200 && xhttp.readyState === 4)
+        {
+          var data= JSON.parse(xhttp.responseText) ;
+          console.log(data);
+          var total_construction=wid * len * no;
+          document.getElementById('total_cost').innerHTML= total_construction * data.total_cost ;
+          document.getElementById('steel').innerHTML= total_construction * data.steel;
+          document.getElementById('cement').innerHTML= total_construction * data.cement;
+          document.getElementById('bricks').innerHTML= total_construction * data.bricks;
+          document.getElementById('stone').innerHTML= total_construction * data.stone;
+          document.getElementById('sand').innerHTML= total_construction * data.sand;
+          document.getElementById('water').innerHTML= total_construction * data.water;
+          document.getElementById('excavation').innerHTML= total_construction * data.excavation;
+          document.getElementById('labour').innerHTML= total_construction * data.labour;
+          document.getElementById('design_fee').innerHTML= total_construction * data.design_fee;
+          document.getElementById('doors').innerHTML= total_construction * data.doors;
+          document.getElementById('frame_works').innerHTML= total_construction * data.frame_work;
+          document.getElementById('plumbing').innerHTML= total_construction * data.plumbing;
+          document.getElementById('electric').innerHTML= total_construction * data.electric;
+          document.getElementById('flooring').innerHTML= total_construction * data.flooring;
+          document.getElementById('painting').innerHTML= total_construction * data.painting;
+          document.getElementById('boundary').innerHTML= total_construction * data.boundary;
+          document.getElementById('others').innerHTML= total_construction * data.others;
+          
+
+        }
+      }
+      xhttp.send();
+    }
+  }
+  
+</script>
 </html>
